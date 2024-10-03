@@ -66,7 +66,9 @@ class Hotel(models.Model):
 
 
 class Room(models.Model):
-    hotel = models.ForeignKey(Hotel, related_name='rooms', on_delete=models.CASCADE)
+    hotel = models.ForeignKey(
+        Hotel, related_name='rooms',
+        on_delete=models.CASCADE)
     room_number = models.CharField(max_length=10)
     price_per_night = models.DecimalField(max_digits=10, decimal_places=2)
     is_available = models.BooleanField(default=True)
@@ -76,7 +78,9 @@ class Room(models.Model):
 
 
 class Booking(models.Model):
-    room = models.ForeignKey(Room, related_name='bookings', on_delete=models.CASCADE)
+    room = models.ForeignKey(
+        Room, related_name='bookings',
+        on_delete=models.CASCADE)
     user_name = models.CharField(max_length=100)
     check_in_date = models.DateField()
     check_out_date = models.DateField()
