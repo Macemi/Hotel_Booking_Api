@@ -1,5 +1,11 @@
 from rest_framework import serializers
-from .models import UserProfile, Hotel, Room, Booking
+from bookings import models
+from .models import (
+    UserProfile,
+    Hotel,
+    Room,
+    Booking,
+)
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
@@ -32,6 +38,15 @@ class UserProfileSerializer(serializers.ModelSerializer):
             instance.set_password(password)
 
         return super().update(instance, validated_data)
+
+
+class ProfileFeedItemSerializer(serializers.ModelSerializer):
+    """Serializes profile feed items"""
+
+    class Meta:
+        model = models.ProfileFeedItem
+        fields = ('id', 'user_profile', 'status_text', 'created_on')
+        extra_kwargs = {'user_profile': {'read_only': True}}
 
 
 class HotelSerializer(serializers.ModelSerializer):

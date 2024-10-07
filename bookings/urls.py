@@ -1,6 +1,10 @@
 from django.urls import path, include
 from bookings import views
-from .views import UserProfileViewSet, HotelViewSet, RoomViewSet, BookingViewSet
+from .views import (UserProfileViewSet,
+                    HotelViewSet,
+                    RoomViewSet,
+                    BookingViewSet,
+)
 
 
 from rest_framework.routers import DefaultRouter
@@ -10,6 +14,7 @@ router.register('profile', UserProfileViewSet)
 router.register('hotels', HotelViewSet)
 router.register('rooms', RoomViewSet)
 router.register('bookings', BookingViewSet)
+router.register('feed', views.UserProfileFeedViewSet)
 
 urlpatterns = [
     path('hello-view/', views.HelloApiView.as_view()),
